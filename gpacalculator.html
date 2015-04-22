@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<!--
+    SOEN 287 Assignment #3
+    By: Cathryn Griffiths
+    -->
+
+<html lang="en"> 
+	<head>
+		<title>Concordia University GPA Calculator</title>
+		<meta charset="utf-8" />
+		<meta name="author" content="Cathryn Griffiths" />
+		<meta name="keywords" content="SOEN287, GPA, Calculator" />
+
+        <!-- CSS Stylesheet -->
+		<link type="text/css" href="styles.css" rel="stylesheet" />
+		
+		<!--JavaScript File-->
+		<script type="text/javascript" src="gpacalculator.js" ></script>
+
+	</head>
+
+	<body onload="displayCumulGPA()">
+		<div class="container">
+
+            <!--Header-->
+			<div class="header">
+				<h1>Concordia University GPA Calculator!</h1>
+				<p>
+					Use the form below to add your courses and grades. The calculator will automatically display your cumulative GPA, 
+					as well as the GPA for each class that you entered. 
+				<p>
+				
+			</div>
+			
+			<!--Input Section-->
+			<div class="displayingForm">
+				<h2>Add Courses</h2>
+				<p>
+					Acceptable inputs are as follows:
+                </p>
+                <ul>
+                    <li>Course Name: Any course name is allowed</li>
+                    <li>Credits: A real number greater than or equal to 0, and less than or equal to 15 (ex: 4.5 or 3.0)</li>
+                    <li>Grade: Letter grades A, B, C, D, and F. Plus and minuses are allowed (ex: B+ or A-)</li>
+                </ul>
+
+                <!-- Form to Add Courses -->
+				<form id="formAdd">
+					<table>
+                        <thead>
+                            <tr>
+                                <th><label for="courseName">Course Name</label></th>
+                                <th><label for="credits">Credits</label></th>
+                                <th><label for="grade">Grade</label></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+							<tr> 
+								<td><input type="text" id="courseName"/></td>
+								<td><input type="text" id="credits" onblur="validateCredits()" /></td>
+								<td><input type="text" id="grade" onblur="validateGrade()" /></td>
+							</tr>
+						</tbody>
+					</table>
+					<p><input type="button" value="Add" onclick="add()" /></p>
+				</form>
+			</div>
+			
+			<!--Display of GPA and Classes-->
+			<div class="displayingResults">
+				<h2>Results</h2>
+				<p>
+					Cumulative GPA: <span id="cgpa"></span>
+				</p>
+				<table>
+					<thead>
+						<tr>
+							<td>#</td>
+							<th>Course Name</th>
+							<th>Credits</th>
+							<th>Grade</th>
+							<th>Class GPA</th>
+						</tr>
+					</thead>
+					<tbody id="display">
+					</tbody>
+				</table>
+				<p><input type="button" value="Remove a Course" onclick="deleteCourse()" /> <input type="button" value="Reset" onclick="reset()" /></p>
+				
+			</div>
+		</div>
+
+		
+		
+		
+	</body>
+</html>
