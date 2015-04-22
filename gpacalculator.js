@@ -115,29 +115,36 @@ function displayCumulGPA() {
 
 // to delete a course 
 function deleteCourse() {
-	var courseToDelete=Number(prompt("What course would you like to delete? NOTE: You must enter the number that appears in the # column. Do NOT enter the name of the course."));
+	if (courseArray.length == 0) {
+		alert("You have no courses to delete.");
+	}
+	else {
+		var courseToDelete=Number(prompt("What course would you like to delete? NOTE: You must enter the number that appears in the # column. Do NOT enter the name of the course."));
 
-	while (courseToDelete<0 || courseToDelete>courseArray.length-1) {
-		courseToDelete=Number(prompt("There was an error with the course you wanted to delete. Please enter the number (the number that appears in the # column) of the course you want to delete again."));
+		while (courseToDelete<0 || courseToDelete>courseArray.length-1) {
+			courseToDelete=Number(prompt("There was an error with the course you wanted to delete. Please enter the number (the number that appears in the # column) of the course you want to delete again."));
+		}
+
+		courseArray[courseToDelete]=null;   // removed course from the array
+
+		// create a new array without the course
+		var newArray=[];
+
+		for (var i=0,j=0; i<courseArray.length; i++) {
+			if (courseArray[i]!=null) {
+				newArray[j]=courseArray[i];
+				j++;
+			}
+		}
+
+		courseArray=newArray;   // assign new array to courseArray
+
+		calculateCumulGPA();
+		displayCumulGPA();
+		displayCourses();
+
 	}
 
-	courseArray[courseToDelete]=null;   // removed course from the array
-
-    // create a new array without the course
-	var newArray=[];
-	
-	for (var i=0,j=0; i<courseArray.length; i++) {
-		if (courseArray[i]!=null) {
-			newArray[j]=courseArray[i];
-			j++;
-		}	
-	}
-
-	courseArray=newArray;   // assign new array to courseArray
-
-	calculateCumulGPA();
-	displayCumulGPA();
-	displayCourses();
 	
 }
 
